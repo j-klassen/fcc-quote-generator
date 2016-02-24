@@ -65,6 +65,8 @@
 
 				if (working) {
 					return;
+				} else {
+					working = true;
 				}
 
 				clearInterval(intervalId);
@@ -94,6 +96,8 @@
 
 					draw();
 					intervalId = setInterval(draw, 500);
+
+					working = false;
 				});
 			});
 		});
