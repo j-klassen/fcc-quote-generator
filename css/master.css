@@ -1,0 +1,136 @@
+body, html {
+	background-color: #353C37;
+	height: 100%;
+}
+
+.main {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* align items in Main Axis */
+	align-items: stretch; /* align items in Cross Axis */
+	align-content: center; /* Extra space in Cross Axis */
+}
+
+.quote-wrapper {
+	display: none;
+}
+
+.source-wrapper {
+	display: none;
+}
+
+.source {
+	background: radial-gradient(ellipse at center, rgba(61,71,53,1) 0%, rgba(19,19,21,1) 100%),
+		repeating-linear-gradient(
+			180deg,
+			transparent,
+			transparent 2px,
+			rgba(0,0,0,0.25) 2px,
+			rgba(0,0,0,0.25) 4px
+		);
+	background-size: 100% 4px;
+}
+
+.glcanvas {
+	background: radial-gradient(ellipse at center, rgba(61,71,53,1) 0%, rgba(19,19,21,1) 100%),
+		repeating-linear-gradient(
+			180deg,
+			transparent,
+			transparent 2px,
+			rgba(0,0,0,0.25) 2px,
+			rgba(0,0,0,0.25) 4px
+		);
+	background-size: 100% 4px;
+	border: 6px solid transparent;
+	border-image: linear-gradient(to bottom, #333 0%, gray 100%);
+	border-image-slice: 1;
+	box-shadow: inset 0px 0px 25px 1px rgba(0,0,0,1);
+}
+
+.glcanvas-container {
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+
+.glcanvas-border1 {
+	padding: 0;
+	margin: 0;
+	box-shadow: 0 0 0 12px hsl(0, 0%, 60%);
+}
+
+.glcanvas-border2 {
+	border: 60px solid transparent;
+	border-image: linear-gradient(to right, #afafaf 0%, #ddd 33%, #ddd 72%, #afafaf 100%);
+	border-image-slice: 1;
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+}
+
+.scanlines {
+	background-color: black;
+	color: white;
+	min-height: 80px;
+	background: repeating-linear-gradient(
+		180deg,
+		transparent,
+		transparent 2px,
+		rgba(0,0,0,0.25) 2px,
+		rgba(0,0,0,0.25) 4px
+	);
+	background-size: 100% 4px;
+}
+
+.noselect::selection {
+	background: transparent;
+}
+
+/* Keyboard Key */
+
+.key {
+	color: #444;
+	font-weight: 600;
+	font-size: 1.2em;
+	text-shadow: 0 0 1px rgba(0,0,0,0.1);
+	width: 40px;
+	height: 45px;
+	margin: 2px auto 2px auto;
+	border-width: 3px 7px 10px;
+	border-style: solid;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.key:active {
+	-webkit-transform: scale(0.95, 0.95);
+	-moz-transform: scale(0.95, 0.95);
+	-ms-transform: scale(0.95, 0.95);
+	-o-transform: scale(0.95, 0.95);
+	transform: scale(0.95, 0.95);
+}
+
+.key {
+	background: #d3cfcc;
+	border-color: #ece8e4 #dedad6 #c9c4c4;
+}
+
+.keycap {
+	width: 120px;
+	height: 32px;
+	font-size: 18px;
+	line-height: 32px;
+	background: #f5f3f1;
+	background: -webkit-linear-gradient(left, #e5e2e1, #f5f3f1, #e5e2e1);
+	background: -moz-linear-gradient(left, #e5e2e1, #f5f3f1, #e5e2e1);
+	background: -ms-linear-gradient(left, #e5e2e1, #f5f3f1, #e5e2e1);
+	background: -o-linear-gradient(left, #e5e2e1, #f5f3f1, #e5e2e1);
+	background: linear-gradient(left, #e5e2e1, #f5f3f1, #e5e2e1);
+	box-shadow: 0 0 10px rgba(0,0,0,0.15);
+	border-radius: 4px;
+}
+
+.k13 {
+	width: 136px;
+	border-left-width: 10px;
+}

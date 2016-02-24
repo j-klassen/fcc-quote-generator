@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Quote Machine</title>
+
+		<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4.0.0-alpha.2/dist/css/bootstrap.min.css"
+					media="screen" title="bootstrap" charset="utf-8">
+		<link rel="stylesheet" href="./css/master.css" media="screen" charset="utf-8">
+	</head>
+	<body>
+
+		<div class="container-fluid main">
+			<div class="row">
+				<div class="col-xs-12 quote-wrapper">
+					<div class="text-xs-left quote" style='font-family: "Courier", fixed, monospace; text-align: left; color: #56C694; font-size: 14px; font-weight: bold; text-transform: uppercase; text-shadow: 0px 0px 1px;'>> curl -L http://bit.ly/1ozo50P<br /><br />
+						<span class="quote-body"></span>
+					</div>
+					<br />
+					<div class="quote-footer" style='font-family: "Courier", fixed, monospace; text-align: right; color: #56C694; font-size: 16px; font-weight: bold; text-transform: uppercase; text-shadow: 0px 0px 1px;'></div>
+					<div class="cursor" style='font-family: "Courier", fixed, monospace; text-align: left; color: #56C694; font-size: 16px; font-weight: bold; text-transform: uppercase; text-shadow: 0px 0px 1px;'>&gt; _</div>
+				</div>
+
+				<div class="col-xs-12 col-md-12 text-xs-center" id="glcanvas-wrapper">
+					<div class="glcanvas-container">
+
+					</div>
+				</div>
+
+				<div class="col-xs-12 text-xs-center">
+					<br />
+					<div class="k13 key btn-quote">
+						<div class="keycap"><span class="noselect">Next Quote</span></div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6 text-xs-center source-wrapper">
+					<canvas class="source">
+					</canvas>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+		<script src="libs/lodash.min.js"></script>
+		<script src="libs/jquery.min.js"></script>
+		<script src="libs/glfx.js"></script>
+		<script src="libs/rasterizeHTML.allinone.js"></script>
+		<script src="./src/app.js"></script>
+	</body>
+</html>
