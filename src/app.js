@@ -148,6 +148,6 @@
 	function buttonTweetClick(evt) {
 		var intent = tweetUrl + encodeURIComponent('"' + quotes[quote].quote + '" - ' + quotes[quote].author);
 		document.querySelector('.btn-tweet a').herf = intent;
-		window.location = intent;
+		window.open(intent, '_blank');
 	}
 })();
