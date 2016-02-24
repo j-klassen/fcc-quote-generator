@@ -1,29 +1,45 @@
+// See http://www.zachstronaut.com/posts/2012/08/17/webgl-fake-crt-html5.html
+// for some inspiration in the overall effect.
+//
+// Some learning for getting the monitor borders: https://css-tricks.com/snippets/css/multiple-borders/
+
 (function app() {
 	// Endpoint
+	// Query Firebase once and generate random quotes locally.
+	// Quotes generated from http://quotes.stormconsultancy.co.uk/random.json
+	// and saved to Firebase.
 	var db = new Firebase('https://fcc-quote-machine.firebaseio.com/');
+	var tweetUrl = 'https://twitter.com/intent/tweet?hashtags=quotes&text=';
 	var quotes = {};
 	var quote;
 	var intervalId;
 	var working = false;
-
+	var ratio = 3/4;
+	var canvasPadding = 5;
+	var canvasBorderFactor = 0.7;
+	// Store a couple of frames for easily toggling
 	var frames = [];
 	var toggle = false;
 
-	// Prep canvas
+	var glcanvasWrapper = document.querySelector('.glcanvas-wrapper');
+	var width = window.getComputedStyle(glcanvasWrapper).width.split('px')[0];
+	width = Math.floor(width * canvasBorderFactor) + canvasPadding * 2;
+
+	// Prep hidden canvas
 	var source = document.querySelector('.source');
-	source.width = 400;
-	source.height = 300;
+	source.width = width;
+	source.height = width * ratio;
 
 	var sourceCtx = source.getContext('2d');
 
-	// Prep glfx
+	// Prep glfx canvas (effects)
 	var glcanvas = fx.canvas();
 	glcanvas.className = 'glcanvas';
-	glcanvas.width = 400;
-	glcanvas.height = 300;
+	glcanvas.width = source.width;
+	glcanvas.height = source.height;
 	var texture = glcanvas.texture(source);
 
-	// Add fx canvas to dom
+	// Generate and add some border dom elements
 	var glcanvasBorder2 = document.createElement('div');
 	glcanvasBorder2.className = 'glcanvas-border2';
 
@@ -40,6 +56,7 @@
 	// Load and draw
 	db.child('quotes').on('value', function(snapshot) {
 		quotes = snapshot.val();
+		// Random quote
 		quote = _.sample(_.keys(quotes));
 
 		document.querySelector('.quote-body').innerHTML = '&quot;' + quotes[quote].quote + '&quot;';
@@ -59,58 +76,20 @@
 
 			intervalId = setInterval(draw, 500);
 
-			// Button click
-			document.querySelector('.btn-quote').addEventListener('click', function (evt) {
-				evt.preventDefault();
-
-				if (working) {
-					return;
-				} else {
-					working = true;
-				}
-
-				clearInterval(intervalId);
-				frames = [];
-
-				var oldQuote = quote;
-				while (quote === oldQuote) {
-					quote = _.sample(_.keys(quotes));
-				}
-
-				document.querySelector('.quote-body').innerHTML = '&quot;' + quotes[quote].quote + '&quot;';
-				document.querySelector('.quote-footer').innerHTML = '- ' + quotes[quote].author;
-				// Blink cursor
-				document.querySelector('.cursor').innerHTML = '&gt; _';
-
-				rasterizeHTML.drawHTML(document.querySelector('.quote-wrapper').outerHTML)
-				.then(function (result) {
-					frames.push(result);
-
-					// Blink cursor
-					document.querySelector('.cursor').innerHTML = '&gt;';
-
-					return rasterizeHTML.drawHTML(document.querySelector('.quote-wrapper').outerHTML)
-				})
-				.then(function (result) {
-					frames.push(result);
-
-					draw();
-					intervalId = setInterval(draw, 500);
-
-					working = false;
-				});
-			});
+			// Button clicks
+			document.querySelector('.btn-quote').addEventListener('click', buttonQuoteClick);
+			document.querySelector('.btn-tweet').addEventListener('click', buttonTweetClick);
 		});
 	});
 
 	function draw() {
+		// We'll take advantage of some cavas composition effects here.
 		sourceCtx.clearRect(0, 0, source.width, source.height);
 		sourceCtx.globalCompositeOperation = '';
 		sourceCtx.globalAlpha = 1;
-		sourceCtx.drawImage(frames[toggle ? 1 : 0].image, 5, 15, source.width, source.height);
+		sourceCtx.drawImage(frames[toggle ? 1 : 0].image, 5, 5, source.width - 5, source.height);
 		sourceCtx.globalAlpha = 0.4;
 		sourceCtx.globalCompositeOperation = 'lighter';
-		//sourceCtx.drawImage(lines, 0, 0);
 
 		// Draw to glfx
 		texture.loadContentsOf(source);
@@ -123,5 +102,52 @@
 		.update();
 
 		toggle = !toggle;
+	}
+
+	function buttonQuoteClick(evt) {
+		evt.preventDefault();
+
+		if (working) {
+			return;
+		} else {
+			working = true;
+		}
+
+		clearInterval(intervalId);
+		frames = [];
+
+		var oldQuote = quote;
+		while (quote === oldQuote) {
+			quote = _.sample(_.keys(quotes));
+		}
+
+		document.querySelector('.quote-body').innerHTML = '&quot;' + quotes[quote].quote + '&quot;';
+		document.querySelector('.quote-footer').innerHTML = '- ' + quotes[quote].author;
+		// Blink cursor
+		document.querySelector('.cursor').innerHTML = '&gt; _';
+
+		rasterizeHTML.drawHTML(document.querySelector('.quote-wrapper').outerHTML)
+		.then(function (result) {
+			frames.push(result);
+
+			// Blink cursor
+			document.querySelector('.cursor').innerHTML = '&gt;';
+
+			return rasterizeHTML.drawHTML(document.querySelector('.quote-wrapper').outerHTML)
+		})
+		.then(function (result) {
+			frames.push(result);
+
+			draw();
+			intervalId = setInterval(draw, 500);
+
+			working = false;
+		});
+	}
+
+	function buttonTweetClick(evt) {
+		var intent = tweetUrl + encodeURIComponent('"' + quotes[quote].quote + '" - ' + quotes[quote].author);
+		document.querySelector('.btn-tweet a').herf = intent;
+		window.location = intent;
 	}
 })();

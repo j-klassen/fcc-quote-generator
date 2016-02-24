@@ -68,6 +68,38 @@ body, html {
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
 }
 
+@media screen and (max-width: 640px) {
+	.glcanvas {
+		background: radial-gradient(ellipse at center, rgba(61,71,53,1) 0%, rgba(19,19,21,1) 100%),
+			repeating-linear-gradient(
+				180deg,
+				transparent,
+				transparent 2px,
+				rgba(0,0,0,0.25) 2px,
+				rgba(0,0,0,0.25) 4px
+			);
+		background-size: 100% 4px;
+		border: 0 solid transparent;
+		border-image: linear-gradient(to bottom, #333 0%, gray 100%);
+		border-image-slice: 1;
+		box-shadow: inset 0px 0px 25px 1px rgba(0,0,0,1);
+	}
+
+	.glcanvas-border1 {
+		padding: 0;
+		margin: 0;
+		box-shadow: 0 0 0 6px hsl(0, 0%, 60%);
+	}
+
+	.glcanvas-border2 {
+		border: 30px solid transparent;
+		border-image: linear-gradient(to right, #afafaf 0%, #ddd 33%, #ddd 72%, #afafaf 100%);
+		border-image-slice: 1;
+		box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+	}
+}
+
+/* See http://codepen.io/0x04/pen/qlayi for idea */
 .scanlines {
 	background-color: black;
 	color: white;
@@ -84,6 +116,16 @@ body, html {
 
 .noselect::selection {
 	background: transparent;
+}
+
+.author, .author a {
+	font-family: "Courier", fixed, monospace;
+	text-align: center;
+	color: #8CD9B7;
+	font-size: 1.2em;
+	font-weight: 700;
+	text-transform: uppercase;
+	text-shadow: 0px 0px 6px #3AAF7B;
 }
 
 /* Keyboard Key */
@@ -133,4 +175,14 @@ body, html {
 .k13 {
 	width: 136px;
 	border-left-width: 10px;
+}
+
+.btn-quote, .btn-tweet {
+	display: inline-block;
+	margin: 0 0.5em;
+}
+
+.btn-tweet a {
+	text-decoration: none;
+	color: #444;
 }

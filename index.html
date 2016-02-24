@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Quote Machine</title>
 
 		<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4.0.0-alpha.2/dist/css/bootstrap.min.css"
@@ -13,15 +14,15 @@
 		<div class="container-fluid main">
 			<div class="row">
 				<div class="col-xs-12 quote-wrapper">
-					<div class="text-xs-left quote" style='font-family: "Courier", fixed, monospace; text-align: left; color: #56C694; font-size: 14px; font-weight: bold; text-transform: uppercase; text-shadow: 0px 0px 1px;'>> curl -L http://bit.ly/1ozo50P<br /><br />
-						<span class="quote-body"></span>
+					<div class="text-xs-left quote" style='font-family: "Courier", fixed, monospace; text-align: left; color: #56C694; font-size: 0.8em; font-weight: 700; text-transform: uppercase; text-shadow: 0px 0px 1px;'>> curl -L http://bit.ly/1ozo50P<br /><br />
+						<span class="quote-body" style="font-size: 1em;"></span>
 					</div>
 					<br />
-					<div class="quote-footer" style='font-family: "Courier", fixed, monospace; text-align: right; color: #56C694; font-size: 16px; font-weight: bold; text-transform: uppercase; text-shadow: 0px 0px 1px;'></div>
-					<div class="cursor" style='font-family: "Courier", fixed, monospace; text-align: left; color: #56C694; font-size: 16px; font-weight: bold; text-transform: uppercase; text-shadow: 0px 0px 1px;'>&gt; _</div>
+					<div class="quote-footer" style='font-family: "Courier", fixed, monospace; text-align: right; color: #56C694; font-size: 1em; font-weight: 700; text-transform: uppercase; text-shadow: 0px 0px 1px;'></div>
+					<div class="cursor" style='font-family: "Courier", fixed, monospace; text-align: left; color: #56C694; font-size: 1em; font-weight: 700; text-transform: uppercase; text-shadow: 0px 0px 1px;'>&gt; _</div>
 				</div>
 
-				<div class="col-xs-12 col-md-12 text-xs-center" id="glcanvas-wrapper">
+				<div class="col-xs-12 col-md-4 col-md-offset-4 text-xs-center glcanvas-wrapper">
 					<div class="glcanvas-container">
 
 					</div>
@@ -32,18 +33,26 @@
 					<div class="k13 key btn-quote">
 						<div class="keycap"><span class="noselect">Next Quote</span></div>
 					</div>
+					<div class="k13 key btn-tweet">
+						<div class="keycap"><span class="noselect"><a href="#" class="noselect">Tweet</a></span></div>
+					</div>
 				</div>
 
-				<div class="col-xs-12 col-md-6 text-xs-center source-wrapper">
+				<div class="col-xs-12 text-xs-center">
+					<br />
+					<span class="author">by <a href="https://github.com/j-klassen">Jake Klassen</a></span>
+				</div>
+
+				<div class="col-xs-12 col-md-4 text-xs-center source-wrapper">
 					<canvas class="source">
 					</canvas>
 				</div>
 			</div>
 		</div>
 
+		<script src="libs/es6-promise.min.js"></script>
 		<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
 		<script src="libs/lodash.min.js"></script>
-		<script src="libs/jquery.min.js"></script>
 		<script src="libs/glfx.js"></script>
 		<script src="libs/rasterizeHTML.allinone.js"></script>
 		<script src="./src/app.js"></script>
